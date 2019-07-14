@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>校园网统一身份认证系统</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/jquery.js"></script>
+
+<script language="javascript">
+	$(function(){
+    $('.loginbox0').css({'position':'absolute','left':($(window).width()-810)/2});
+	//$('.loginlist').css({'position':'relative','left':($('.loginbox0').width())/4});
+	$(window).resize(function(){  
+    $('.loginbox0').css({'position':'absolute','left':($(window).width()-810)/2});
+	//$('.loginlist').css({'position':'relative','left':($('.loginbox0').width())/4});
+    })  
+});  
+</script> 
+
+</head>
+
+<body style="background-color:#df7611; background-image:url(images/light1.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+
+
+<div class="logintop">    
+    <span>欢迎进入校园网统一身份认证系统</span>    
+    <ul>
+    <li><p th:text="'当前用户：（ ' + ${session.ssoUser.userName} + ' ）'" style="color:#fff;">UserName</p></li>
+    <li><a th:href="@{'./logoutByTicket?ticket='+${session.ssoUser.ticket}}" style="color:#ff0000;">【单点退出】</a></li>
+    </ul>
+    </div>
+    
+    <div class="loginbody1">
+       
+    <div class="loginbox0">
+    
+    <ul class="loginlist">
+    <li><a href="http://localhost:8081/hello" target="_blank" ><img src="images/l01.png"  alt="图书馆系统"/><p>书目电子检索<br />图书馆系统</p></a></li>
+    <li><a href="http://localhost:8082/hello" target="_blank" ><img src="images/l03.png"  alt="教务系统"/><p>物理实验示范<br />教务系统</p></a></li>
+    </ul>
+    
+    
+    </div>
+    
+    </div>
+    
+    <div class="loginbm">©  2019&nbsp;&nbsp;&nbsp; <strong>unified identity authentication system of campus network</strong> &nbsp;&nbsp;&nbsp;校园网统一身份认证系统</div>
+	
+    
+</body>
+
+</html>

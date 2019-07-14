@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>某某大学物理实验示范教务中心</title>
+<link rel="stylesheet" href="css/style1.css" type="text/css" media="all"/>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+//图片滚动 调用方法 imgscroll({speed: 30,amount: 1,dir: "up"});
+$.fn.imgscroll = function(o){
+	var defaults = {
+		speed: 40,
+		amount: 0,
+		width: 1,
+		dir: "left"
+	};
+	o = $.extend(defaults, o);
+	
+	return this.each(function(){
+		var _li = $("li", this);
+		_li.parent().parent().css({overflow: "hidden", position: "relative"}); //div
+		_li.parent().css({margin: "0", padding: "0", overflow: "hidden", position: "relative", "list-style": "none"}); //ul
+		_li.css({position: "relative", overflow: "hidden"}); //li
+		if(o.dir == "left") _li.css({float: "left"});
+		
+		//初始大小
+		var _li_size = 0;
+		for(var i=0; i<_li.size(); i++)
+			_li_size += o.dir == "left" ? _li.eq(i).outerWidth(true) : _li.eq(i).outerHeight(true);
+		
+		//循环所需要的元素
+		if(o.dir == "left") _li.parent().css({width: (_li_size*3)+"px"});
+		_li.parent().empty().append(_li.clone()).append(_li.clone()).append(_li.clone());
+		_li = $("li", this);
+
+		//滚动
+		var _li_scroll = 0;
+		function goto(){
+			_li_scroll += o.width;
+			if(_li_scroll > _li_size)
+			{
+				_li_scroll = 0;
+				_li.parent().css(o.dir == "left" ? { left : -_li_scroll } : { top : -_li_scroll });
+				_li_scroll += o.width;
+			}
+				_li.parent().animate(o.dir == "left" ? { left : -_li_scroll } : { top : -_li_scroll }, o.amount);
+		}
+		
+		//开始
+		var move = setInterval(function(){ goto(); }, o.speed);
+		_li.parent().hover(function(){
+			clearInterval(move);
+		},function(){
+			clearInterval(move);
+			move = setInterval(function(){ goto(); }, o.speed);
+		});
+	});
+};
+//友情链接下拉框跳转弹出新窗口
+function frlink(selObj){
+window.open(selObj.options[selObj.selectedIndex].value);}
+/*
+$(document).ready(function() {
+    $.ajax({
+        url:"./getloginUser",
+        type:"post",
+        success:function (data) {
+            $(".user")[0].innerHTML=data;
+        },
+        error:function (data) {
+            console.log("loginUser not found!"+data);
+        }
+    })
+});*/
+</script>
+</head>
+
+<body>
+<div id="hearder2" class="clearfix">
+	<!-- <div class="logo"> -->
+   	  <!-- <img src="images/logo1.png"> -->
+  <!-- </div> -->
+  <div class="logo-name">某某大学物理实验示范教务中心</div>
+  <div class="form-tools">
+   	  <form id="search" name="search" method="post">
+      	<div class="tools-link">
+            <div id="user"><span th:text="'当前用户：( ' + ${session.loginUser} + ' )'" class="user">ssoUser</span>
+                <span>【<a th:href="@{'./ssoLogout?ticket='+${#httpServletRequest.getParameter('ticket')}}" style="color:#ff0000;">统一注销</a>】</span></div>
+        </div>
+        <div class="search-box">
+            <input type="text" name="textfield" id="textfield" class="input-text" placeholder="请输入搜索关键词">
+            <input type="image" src="images/search.png" class="input-submit" />
+        </div>
+  	  </form>
+    </div>
+</div>
+<div id="menu-box" class="clearfix">
+	<ul>
+    	<li><a href="index.html">首页</a></li>
+        <li><a href="#">中心概况</a></li>
+        <li><a href="index.html">师资队伍</a></li>
+        <li><a href="index.html">设备资源</a></li>
+        <li><a href="#">教学模式</a></li>
+        <li><a href="index.html">网上教学</a></li>
+        <li><a href="index.html">新闻中心</a></li>
+        <li><a href="index.html">创新成果</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</div>
+<div id="slider-box" style="background:url(images/slider1.jpg) center center;"></div>
+<!-- index1-div1 -->
+<div id="index1-div1" class="clearfix">
+	<div class="index1-left675">
+    	<div class="title-box">中心简介<a href="#" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+        <p><img src="images/p-img.jpg" align="left">某某大学物理实验教务示范系统某某年经某某国家某某教育部校园网统一身份
+		某某大学物理实验教务示范系统某某年经某某国家某某教育部校园网统一身份认证系统批准设立。某某大学物理实验教务示范
+		某某教育部校园网统一身份认证系统批准设立。某某大学物理实验教务示范系统某某年经某某国家某某教育部校园网统一身份
+		某某大学物理实验教务示范系统某某年经某某国家某某教育部校园网统一身份认证系统批准设立。某某大学物理实验教务示范
+		某某大学物理实验教务示范系统某某年经某某国家某某教育部校园网统一身份认证系统...<a href="#">查看更多...</a></p>
+    </div>
+    <div class="index1-right300">
+    	<div class="title-box">通知公告<a href="index.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+          <ul>
+              <li><a href="#">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2019-05-23</span></li>
+              <li><a href="#">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2019-05-23</span></li>
+              <li><a href="#">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2019-05-23</span></li>
+              <li><a href="#">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2019-05-23</span></li>
+          </ul>
+    </div>
+</div>
+<!-- index1-div2 -->
+<div id="index1-div2" class="clearfix">
+	<div class="index1-left675">
+    	<div class="index1-li-box">
+    	<div class="index1-left330">
+        	<div class="title-box">中心动态<a href="index.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <img src="images/c1.jpg" style="width:330px; height:140px; margin:5px 0;">
+            <ul>
+                <li><a href="#">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2019-05-23</span></li>
+                <li><a href="#">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2019-05-23</span></li>
+                <li><a href="#">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2019-05-23</span></li>
+                <li><a href="#">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2019-05-23</span></li>
+                <li><a href="#">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2019-05-23</span></li>
+            </ul>
+        </div>
+        <div class="index1-right330">
+        	<div class="title-box">创新成果<a href="index.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <img src="images/c2.jpg" style="width:330px; height:140px; margin:5px 0;">
+            <ul>
+                <li><a href="#">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2019-05-23</span></li>
+                <li><a href="#">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2019-05-23</span></li>
+                <li><a href="#">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2019-05-23</span></li>
+                <li><a href="#">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2019-05-23</span></li>
+                <li><a href="#">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2019-05-23</span></li>
+            </ul>
+        </div>
+        </div>
+        <!-- slider -->
+        <div class="index1-pic-gun">
+        	<div class="title-box">设备资源<a href="index.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <div class="index1-scrollleft clearfix">
+                <ul>
+                    <li>
+                        <a href="#"><img alt="霍尔效应" src="images/a1.jpg"/></a>
+                        <span>霍尔效应</span>
+                    </li>
+                    <li>
+                        <a href="#"><img alt="声速测量" src="images/a2.jpg"/></a>
+                        <span>声速测量</span>
+                    </li>
+                    <li>
+                        <a href="#"><img alt="交流电梯" src="images/a3.jpg"/></a>
+                        <span>交流电梯</span>
+                    </li>
+                    <li>
+                        <a href="#"><img alt="声速测量" src="images/a2.jpg"/></a>
+                        <span>声速测量</span>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+            $(document).ready(function(){
+            
+                $(".index1-scrollleft").imgscroll({
+                    speed: 40,    //图片滚动速度
+                    amount: 0,    //图片滚动过渡时间
+                    width: 1,     //图片滚动步数
+                    dir: "left"   // "left" 或 "up" 向左或向上滚动
+                });
+                
+            });
+            </script>
+        </div>
+        <!-- slider end -->
+    </div>
+    <div class="index1-right300">
+        
+		<div class="index1-list-menu">
+        	<div class="title-box">网络课程</div>
+            <ul>
+            	<li><a href="#">基础类实验</a></li>
+                <li><a href="#">设计类实验</a></li>
+                <li><a href="#">综合类实验</a></li>
+                <li><a href="#">研究类实验</a></li>
+                <li><a href="#">基础类实验</a></li>
+                <li><a href="#">设计类实验</a></li>
+                <li><a href="#">综合类实验</a></li>
+                <li><a href="#">研究类实验</a></li>
+                <li><a href="#">其它类实验</a></li>
+            </ul>
+    	</div>
+    </div>
+</div>
+<!-- div5 -->
+<div id="div5" class="clearfix">
+    <div class="link-box">
+    	<span>友情链接：</span>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 教育类网站 ---</option>
+            <option value="http://www.baidu.com">百度网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 政府类网站 ---</option>
+            <option value="http://www.china.com">中华网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 校园类网站 ---</option>
+            <option value="http://www.baidu.com">百度网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 其它类网站 ---</option>
+            <option value="http://www.baidu.com">百度网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+    </div>
+</div>
+<div id="div6">Copyright &copy; 2019 某某大学物理实验示范教务中心 All rights reserved.校园网统一身份认证系统</div>
+</body>
+</html>
+

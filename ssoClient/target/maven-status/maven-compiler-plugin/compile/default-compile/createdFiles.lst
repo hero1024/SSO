@@ -1,0 +1,7 @@
+com\spj\sso\client\plugin\config\PlugConfiguration.class
+com\spj\sso\client\plugin\config\PlugConfiguration$1.class
+com\spj\sso\client\plugin\filter\CommonAuthFilter.class
+com\spj\sso\client\plugin\service\UserAccessService.class
+com\spj\sso\client\plugin\service\impl\UserAccessServiceImpl.class
+com\spj\sso\client\plugin\config\PlugConfiguration$2.class
+com\spj\sso\client\plugin\controller\SsoClientController.class

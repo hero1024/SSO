@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    content-type: text/html
+    cache: false
+  redis:
+    database: 11
+    port: 6379
+    host: 127.0.0.1
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+  application:
+    name: sso-app1
+sso:
+  server:
+    url: https://localhost:8080
+  client:
+    protect: /hello

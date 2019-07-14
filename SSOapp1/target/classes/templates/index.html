@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html ng-app="moudule" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css" charset=UTF-8";>[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<!-- 主菜单 -->
+  <title>某某大学图书馆 </title>
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.search.css">
+<link rel="stylesheet" href="./common.css">
+<script src="./jquery-1.8.3.min.js"></script>
+<!--<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({
+			url:"./getloginUser",
+			type:"post",
+			success:function (data) {
+				$(".user")[0].innerHTML=data;
+			},
+			error:function (data) {
+				console.log("loginUser not found!"+data);
+			}
+		})
+	});
+</script>-->
+</head>
+<body style="background:#e2e2e2;">
+<div id="header_opac">
+	<h1 class="header_opac_img">
+		<div class="header_opac_logo">
+    	某某大学图书馆系统<br>
+			<p>Online Public Access Catalogue</p>
+
+		</div>
+	</h1>
+	<div class="header_right header_right_top">
+		<p class="header_right_font">       </p>
+		<p style="margin-top: 60px;" class="header_right_font">
+			<span id="bookcartCount">当前用户</span> | <font color="blue"></font> (<span th:text="${session.loginUser}" class="user">登录</span>)
+			 | <span>【<a th:href="@{'./ssoLogout?ticket='+${#httpServletRequest.getParameter('ticket')}}" style="color:#ff0000;">统一注销</a>】</span></p>
+	</div>
+</div>
+
+<div id="menubar">
+	<ul id="menu_top">
+    		  	<li><a class="menu_top_on" style="color: #6C5B23;" href="#" target="_self">书目检索</a></li>
+	  		  	<li><a href="#" target="_self">热门推荐</a></li>
+	  		  	<li><a href="#" target="_self">分类浏览</a></li>
+	  		  	<li><a href="#" target="_self">新书通报</a></li>
+	  		  	<li><a href="#" target="_self">期刊导航</a></li>
+	  		  	<li><a href="#" target="_self">规章制度</a></li>
+	  		  	<li><a href="#" target="_self">学科参考</a></li>
+	  		  	<li><a href="#" target="_self">本馆概况</a></li>
+	  		  	<li><a href="#" target="_self">开放时间</a></li>
+	  		  	<li><a href="javascript:void(0);" target="_blank">借书入口</a></li>
+	  	        <div class="clear"></div>
+	</ul>
+</div>
+<div id="submenu">
+	  	  	<a href="#" target="_self"><strong style="">馆藏检索</strong></a>	 	
+	  	
+	  	<a href="#" target="_self">简单检索</a>
+	  	
+	  	<a href="#" target="_self">多字段检索</a>
+	        <div class="clear"></div>
+</div>
+
+
+<!-- uiView:  --><div ui-view="" class="ng-scope"><!-- 
+<div ui-view="topbar"></div>
+ -->
+<!-- uiView: main --><div ui-view="main" class="ng-scope"><div ng-controller="indexCtrl" class="ng-scope">
+	<div id="mainbox">
+		<div id="container">
+			<fieldset>
+				<legend><img src="./s_f_gc.jpg"></legend>
+				  <div class="search_bgimg">
+					<div class="search clearfix" style="margin:20px 0;">
+						<div class="input-group-btn search-select">
+										<button type="button" class="btn-default searchColumn" val="">
+											<span>任意词</span>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu selectFieldCode">
+											<!-- ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="any" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">任意词</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="02" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">题名</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="03" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">责任者</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="04" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">主题词</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="05" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">ISBN</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="07" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">分类号</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="08" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">索书号</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="09" class="ng-scope"><a href="javascript:void(0)" class="ng-binding">出版社</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList --><li ng-repeat="item in leftConfig.searchFieldsList" val="10" class="ng-scope"><a href="javascript:void(0);" class="ng-binding">丛书名</a></li><!-- end ngRepeat: item in leftConfig.searchFieldsList -->
+										</ul>
+									</div>
+						<input type="hidden" ng-model="locale" name="locale" id="locale" class="ng-pristine ng-valid" value="zh_CN">
+						<input type="text" class="search-input searchWord" ng-keyup="keyup($event)">
+						<a href="javascript:void(0)" ng-click="doSimpleSearch()" class="form-btn pointer" title="检索"><img src="./icon_search.png"></a>
+						<a href="javascript:void(0)" ng-click="toHighSearch()" class="form-btn pointer" title="高级检索"><img src="./icon_search-high.png"></a>
+					</div>
+
+					<div id="hottag" style="padding:10px 0;">
+						<strong>热门检索：</strong><top-ten>   <a href="#">世界经济</a> |  <a href="#">思想政治理论课</a> |  <a href="#">马尔库塞</a> |  <a href="#">人性的弱点</a> |  <a href="#">毕飞宇</a> |  <a href="#">文学 化学</a> |  <a href="#">arcgis</a> |  <a href="#">杜卫</a> |  <a href="#">辞海</a> | </top-ten>
+					</div><br>　　
+					<a href="#">查看30天内的热门检索词</a>
+				  </div>
+
+			</fieldset>	  
+		</div>		 
+		
+		<div id="search_container">
+		    <div id="search_container_left">
+				<h3>热门检索词</h3><p><span id="swf" style="visibility: visible;"></span></p>
+			</div>
+			<span id="top_lend_shelf">     <div id="search_container_right">
+   	<h3>热门借阅</h3>
+       <p></p><ul>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>明朝那些事儿</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>数学模型在生态学的应用及研究</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>科学社会学</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>应对气候变化报告</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>比较</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>数学模型.第4版</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>孙子译注</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>科学史及其与哲学和宗教的关系</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>人民法院案例选:分类重排本,刑事卷</span></a></li>
+		  		  <li><a target="_blank" href="javascript:void(0);"><span>智识分子:做个复杂的现代人</span></a></li>
+		                  
+		</ul>
+       <p></p>
+   </div>
+   <div id="search_container_center">
+   	<h3>热门图书</h3>
+       <p></p><ul>
+       		           	<li><a target="_blank" href="javascript:void(0);"><span>悲惨世界</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>冰与火之歌.卷一,权力的游戏.Ⅰ,a g...</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>明朝那些事儿</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>王小波全集</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>平凡的世界</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>天津大学馆际互借证</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>无人生还</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>大漠谣</span></a></li>
+                       	<li><a target="_blank" href="javascript:void(0);"><span>国外冶金专利文摘.第2辑</span></a></li>
+                     
+           </ul>
+       <p></p>
+   </div>
+</span>
+		</div> 
+		
+		<div class="clear"></div>
+	</div>
+</div></div></div>
+		  
+
+
+
+
+
+<div id="footer"><div id="copy"><p> 某某大学图书馆&nbsp;&nbsp; v1.0.0  &nbsp;&nbsp;</p><p>© 2019 <a target="_blank" href="javascript:void(0)">unified identity authentication system of campus network. 校园网统一身份认证系统</a></p></div></div></body></html>

@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: spjsso
+    key-store-type: PKCS12
+    key-alias: tomcat
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    content-type: text/html
+    cache: false
+  redis:
+    database: 10
+    port: 6379
+    host: 127.0.0.1
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+  application:
+    name: sso-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sso?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+  mybatis:
+    config-location: classpath:mybatis-config.xml
+    mapper-locations: classpath:mybatis/*Mapper.xml
+
